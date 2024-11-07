@@ -19,14 +19,13 @@ class DocumentRetrieval:
 
     def search(self, querystring):
         query = self.query_parser.parse(querystring)
-
-        for hit in self.searcher.search(query, 10).scoreDocs.search(query):
+        hits = self.searcher.search(query, 10).scoreDocs
+        for hit in hits:
             doc_id = hit.doc
             doc = self.get_doc(doc_id)
             print(f"Found document with content: {doc.get('text_content')}")
             print(f"Path: {doc.get('file_path')}")
             print(f"Score: {hit.score}")
-            print()
             print()
 
     def get_doc(self, doc_id):
