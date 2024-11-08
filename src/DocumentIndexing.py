@@ -35,24 +35,26 @@ class DocumentIndexing:
         indexWriterConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND) #OpenMode: APPEND, CREATE, CREATE_OR_APPEND
         self.indexWriter = IndexWriter(directory, indexWriterConfig)
 
-    def add_folder(self, path):
-        self.folders[path] = None
+    def add_folder(self, path, reinit = False):
+        if path not in self.folders or reinit:
+            self.folders[path] = None
 
-    def index_folders(self, reInit = False):
+    def index_folders(self, reInit = False, expireTime = None):
         for path, lastUpdate in self.folders.items():
-            if lastUpdate is None or reInit:
-                print("index")
+            lastUpdate_dt = datetime.fromtimestamp(lastUpdate) if lastUpdate is not None else None
+            if lastUpdate is None or reInit or (expireTime is not None and lastUpdate_dt + expireTime < datetime.now()):
+                print("indexing path: ", path)
                 for d in os.listdir(path):
                     if d.endswith('.txt'):
                         file_path = os.path.join(path, d)
                         self.index_document(file_path)
+                self.indexWriter.commit()
+                unix_timestamp = (datetime.utcnow() - datetime(1970, 1, 1)).total_seconds()
+                self.folders[path] = unix_timestamp
 
-    def commit_and_close(self):
-        self.indexWriter.commit()
+
+    def close(self):
         self.indexWriter.close()
-        for folderItems in self.folders:
-            unix_timestamp = (datetime.utcnow() - datetime(1970, 1, 1)).total_seconds()
-            self.folders[folderItems] = unix_timestamp
         self.update_index_state()
 
     def index_document(self, path):

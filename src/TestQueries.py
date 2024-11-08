@@ -19,7 +19,12 @@ def test_queries(docRetrieval, small = True):
     for q in query_data.values:
         query_id = q[0]
         query = q[1]
-        result = docRetrieval.search(query)
+        result = []
+        for i in docRetrieval.search(query):
+            doc_id = i.doc
+            doc = docRetrieval.get_doc(doc_id)
+            result.append(int(doc.get('file_name').replace("output_","").replace(".txt","")))
+
         query_result_doc = query_result_data[query_result_data['Query_number'] == query_id]['doc_number'].tolist()[0]
 
         if query_result_doc in result:

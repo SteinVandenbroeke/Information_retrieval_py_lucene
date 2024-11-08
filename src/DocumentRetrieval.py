@@ -23,16 +23,7 @@ class DocumentRetrieval:
         escaped_querystring = QueryParserBase.escape(querystring)
         query = self.query_parser.parse(escaped_querystring)
         hits = self.searcher.search(query, 10).scoreDocs
-        results = []
-        for hit in hits:
-            doc_id = hit.doc
-            doc = self.get_doc(doc_id)
-            results.append(doc.get('file_path'))
-            # print(f"Found document with content: {doc.get('text_content')}")
-            # print(f"Path: {doc.get('file_path')}")
-            # print(f"Score: {hit.score}")
-            # print()
-        return results
+        return hits
 
     def get_doc(self, doc_id):
         return self.searcher.doc(doc_id)
