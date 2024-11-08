@@ -27,7 +27,7 @@ class DocumentRetrieval:
         for hit in hits:
             doc_id = hit.doc
             doc = self.get_doc(doc_id)
-            results.append(int(doc.get('file_name').replace(".txt","").replace("output_","")))
+            results.append(doc.get('file_path'))
             # print(f"Found document with content: {doc.get('text_content')}")
             # print(f"Path: {doc.get('file_path')}")
             # print(f"Score: {hit.score}")

@@ -20,7 +20,7 @@ def test_queries(docRetrieval, small = True):
         query_id = q[0]
         query = q[1]
         result = docRetrieval.search(query)
-        query_result_doc = int(query_result_data[query_result_data['Query_number'] == query_id]['doc_number'].tolist()[0])
+        query_result_doc = query_result_data[query_result_data['Query_number'] == query_id]['doc_number'].tolist()[0]
 
         if query_result_doc in result:
             passes += 1
