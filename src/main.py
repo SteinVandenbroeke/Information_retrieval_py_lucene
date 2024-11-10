@@ -3,7 +3,7 @@ import datetime
 
 from DocumentIndexing import DocumentIndexing
 from DocumentRetrieval import DocumentRetrieval
-from TestQueries import test_queries
+from TestQueries import test_queries, create_result_csv, evaluation
 
 from org.apache.lucene.analysis.en import EnglishAnalyzer
 from org.apache.lucene.analysis.standard import StandardAnalyzer
