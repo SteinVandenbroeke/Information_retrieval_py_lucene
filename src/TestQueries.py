@@ -34,6 +34,7 @@ def test_queries(docRetrieval, small = True):
             fails += 1
             #print("failed")
     print(passes, " out of ", passes+fails, " queries passed.")
+    return (passes, passes+fails)
 
 def create_result_csv(docRetrieval, small = True):
     start_time = datetime.datetime.now()

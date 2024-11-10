@@ -19,8 +19,7 @@ class DocumentIndexing:
         self.folders = {}
         if not os.path.isdir(index_location):
             os.makedirs(index_location)
-            self.update_index_state()
-        elif os.path.isfile(index_location + "/indexed_folders.json"):
+        if os.path.isfile(index_location + "/indexed_folders.json"):
             with open(index_location + "/indexed_folders.json", 'r') as openfile:
                 # Reading from json file
                 self.folders = json.load(openfile)
