@@ -1,3 +1,4 @@
+import shutil
 import sys, os, lucene
 import datetime
 
@@ -31,10 +32,12 @@ def plot(data, plot_metrics, as_titles = ["x-as", "y-as"], title= "Plot"):
     x = np.arange(len(analyzer_names))
 
     plt.figure(figsize=(22, 8))
+    counter = 0
     for i, metric in enumerate(metrics):
         if metric not in plot_metrics:
             continue
-        plt.bar(x + i * bar_width, values[metric], bar_width, label=metric)
+        plt.bar(x + counter * bar_width, values[metric], bar_width, label=metric)
+        counter+=1
 
     # Labeling and legend
     plt.xlabel(as_titles[0])
@@ -46,40 +49,48 @@ def plot(data, plot_metrics, as_titles = ["x-as", "y-as"], title= "Plot"):
 
     plt.show()
 
-def testRun(analyzer, dataset, retrival_model, query_parser, scoring_model):
+def testRun(analyzer, dataset, retrival_model, create_csv = False):
     small = False
     if "small" in dataset:
         small = True
-
+    if os.path.isdir(str(dataset.split("/").pop() + str(analyzer.__name__))):
+        shutil.rmtree(str(dataset.split("/").pop() + str(analyzer.__name__)), ignore_errors=False)
     print(str(analyzer.__name__) + " and " + str(retrival_model) + ":")
     start_time = datetime.datetime.now()
     doc_index_StandardAnalyzer = DocumentIndexing(str(dataset.split("/").pop() + str(analyzer.__name__)), analyzer())
-    doc_index_StandardAnalyzer.add_folder(dataset, True)
+    doc_index_StandardAnalyzer.add_folder(dataset, False)
     doc_index_StandardAnalyzer.index_folders()
     docRetrieval = DocumentRetrieval(str(dataset.split("/").pop() + str(analyzer.__name__)), analyzer(), retrival_model)
-    passes_failes = evaluation(docRetrieval, small)
+    if create_csv:
+        resultData = None
+        create_result_csv(docRetrieval, small)
+    else:
+        resultData = evaluation(docRetrieval, small)
+
     end_time = datetime.datetime.now()
     elapsed_time = end_time - start_time
     print("run time:", elapsed_time)
     doc_index_StandardAnalyzer.close()
     print("-----------------------------------------------")
-    return (elapsed_time, passes_failes)
+    if resultData != None:
+        resultData["totalTime"] = elapsed_time.total_seconds()
+    return (elapsed_time, resultData)
 
 
 def analyserTest(data_set, to_test = ["StandardAnalyzer", "SimpleAnalyzer", "WhitespaceAnalyzer", "EnglishAnalyzer"]):
     analyserTest_start_time = datetime.datetime.now()
     results = []
     if "StandardAnalyzer" in to_test:
-        results.append({"StandardAnalyzer and ClassicSimilarity": testRun(StandardAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"StandardAnalyzer and ClassicSimilarity": testRun(StandardAnalyzer, data_set, ClassicSimilarity())})
 
     if "SimpleAnalyzer" in to_test:
-        results.append({"SimpleAnalyzer and ClassicSimilarity": testRun(SimpleAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"SimpleAnalyzer and ClassicSimilarity": testRun(SimpleAnalyzer, data_set, ClassicSimilarity())})
 
     if "WhitespaceAnalyzer" in to_test:
-        results.append({"WhitespaceAnalyzer and ClassicSimilarity": testRun(WhitespaceAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"WhitespaceAnalyzer and ClassicSimilarity": testRun(WhitespaceAnalyzer, data_set, ClassicSimilarity())})
 
     if "EnglishAnalyzer" in to_test:
-        results.append({"EnglishAnalyzer and ClassicSimilarity": testRun(EnglishAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"EnglishAnalyzer and ClassicSimilarity": testRun(EnglishAnalyzer, data_set, ClassicSimilarity())})
     #results.append(testRun(CustomStemmingAnalyzer, data_set, ClassicSimilarity(), None, None))TODO
     analyserTest_end_time = datetime.datetime.now()
     print("Analyser test time: ", analyserTest_end_time - analyserTest_start_time)
@@ -89,22 +100,22 @@ def retrivalModelTest(data_set, to_test = ["ClassicSimilarity", "BM25Similarity"
     retrivalModel_start_time = datetime.datetime.now()
     results = []
     if "ClassicSimilarity" in to_test:
-        results.append({"StandardAnalyzer and ClassicSimilarity": testRun(StandardAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"StandardAnalyzer and ClassicSimilarity": testRun(StandardAnalyzer, data_set, ClassicSimilarity())})
 
     if "BM25Similarity" in to_test:
-        results.append({"StandardAnalyzer and BM25Similarity": testRun(StandardAnalyzer, data_set, BM25Similarity(), None, None)})
+        results.append({"StandardAnalyzer and BM25Similarity": testRun(StandardAnalyzer, data_set, BM25Similarity())})
 
     if "LMDirichletSimilarity" in to_test:
-        results.append({"StandardAnalyzer and LMDirichletSimilarity": testRun(StandardAnalyzer, data_set, LMDirichletSimilarity(), None, None)})
+        results.append({"StandardAnalyzer and LMDirichletSimilarity": testRun(StandardAnalyzer, data_set, LMDirichletSimilarity())})
 
     if "LMJelinekMercerSimilarity(0.7)" in to_test:
-        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.7)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.7), None, None)})
+        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.7)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.7))})
 
     if "LMJelinekMercerSimilarity(0.5)" in to_test:
-        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.5)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.5), None, None)})
+        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.5)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.5))})
 
     if "LMJelinekMercerSimilarity(0.9)" in to_test:
-        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.9)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.9), None, None)})
+        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.9)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.9))})
     retrivalModel_end_time = datetime.datetime.now()
     print("Retrivalmodel test time: ", retrivalModel_end_time - retrivalModel_start_time)
     return results
@@ -129,15 +140,17 @@ start_time = datetime.datetime.now()
 #
 
 
-print("---------- Large dataset ----------")
-analyserResults = analyserTest("../datasets/full_docs", ["StandardAnalyzer", "EnglishAnalyzer"])
-analyserResults.append({"StandardAnalyzer and LMDirichletSimilarity": testRun(StandardAnalyzer, "../datasets/full_docs", LMDirichletSimilarity(), None, None)})
-analyserResults.append({"EnglihAnalyzer and LMDirichletSimilarity": testRun(EnglishAnalyzer, "../datasets/full_docs", LMDirichletSimilarity(), None, None)})
-print("Large dataset results", analyserResults)
+# print("---------- Large dataset ----------")
+# analyserResults = analyserTest("../datasets/full_docs", ["StandardAnalyzer", "EnglishAnalyzer"])
+# analyserResults.append({"StandardAnalyzer and LMDirichletSimilarity": testRun(StandardAnalyzer, "../datasets/full_docs", LMDirichletSimilarity())})
+# analyserResults.append({"EnglihAnalyzer and LMDirichletSimilarity": testRun(EnglishAnalyzer, "../datasets/full_docs", LMDirichletSimilarity())})
+# print("Large dataset results", analyserResults)
+#
+# plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Large dataset results MAP@K")
+# plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Large dataset results MAP@R")
+# plot(analyserResults, ["totalTime"], ["Analysers", "Time"])
+#
+# end_time = datetime.datetime.now()
+# print("Total run time: ", end_time - start_time)
 
-plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Large dataset results MAP@K")
-plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Large dataset results MAP@R")
-plot(analyserResults, ["QueryTime"], ["Analysers", "Time"])
-
-end_time = datetime.datetime.now()
-print("Total run time: ", end_time - start_time)
+testRun(StandardAnalyzer, "../datasets/full_docs", LMDirichletSimilarity(), True)
