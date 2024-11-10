@@ -124,33 +124,33 @@ def retrivalModelTest(data_set, to_test = ["ClassicSimilarity", "BM25Similarity"
 # docIndexing.add_folder("../datasets/
 
 start_time = datetime.datetime.now()
-# analyserResults = analyserTest("../datasets/full_docs_small")
-# retrivalResults = retrivalModelTest("../datasets/full_docs_small")
-# print("anyser results", analyserResults)
-# print("model retrive resulte", retrivalResults)
-#
-#
-# plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Analysers precision small dataset")
-# plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Analysers retrival small dataset")
-# plot(analyserResults, ["QueryTime"], ["Analysers", "Time"])
-#
-# plot(retrivalResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Retrival models", "MAP@K"], "Retrival models precision small dataset")
-# plot(retrivalResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Retrival models", "MAR@K"], "Retrival models precision small dataset")
-# plot(retrivalResults, ["QueryTime"], ["Retrival models", "Time"], "Retrival models run time small dataset")
-#
+analyserResults = analyserTest("../datasets/full_docs_small")
+retrivalResults = retrivalModelTest("../datasets/full_docs_small")
+print("anyser results", analyserResults)
+print("model retrive resulte", retrivalResults)
 
 
-# print("---------- Large dataset ----------")
-# analyserResults = analyserTest("../datasets/full_docs", ["StandardAnalyzer", "EnglishAnalyzer"])
-# analyserResults.append({"StandardAnalyzer and LMDirichletSimilarity": testRun(StandardAnalyzer, "../datasets/full_docs", LMDirichletSimilarity())})
-# analyserResults.append({"EnglihAnalyzer and LMDirichletSimilarity": testRun(EnglishAnalyzer, "../datasets/full_docs", LMDirichletSimilarity())})
-# print("Large dataset results", analyserResults)
-#
-# plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Large dataset results MAP@K")
-# plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Large dataset results MAP@R")
-# plot(analyserResults, ["totalTime"], ["Analysers", "Time"])
-#
-# end_time = datetime.datetime.now()
-# print("Total run time: ", end_time - start_time)
+plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Analysers precision small dataset")
+plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Analysers retrival small dataset")
+plot(analyserResults, ["QueryTime"], ["Analysers", "Time"])
+
+plot(retrivalResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Retrival models", "MAP@K"], "Retrival models precision small dataset")
+plot(retrivalResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Retrival models", "MAR@K"], "Retrival models precision small dataset")
+plot(retrivalResults, ["QueryTime"], ["Retrival models", "Time"], "Retrival models run time small dataset")
+
+
+
+print("---------- Large dataset ----------")
+analyserResults = analyserTest("../datasets/full_docs", ["StandardAnalyzer", "EnglishAnalyzer"])
+analyserResults.append({"StandardAnalyzer and LMDirichletSimilarity": testRun(StandardAnalyzer, "../datasets/full_docs", LMDirichletSimilarity())})
+analyserResults.append({"EnglihAnalyzer and LMDirichletSimilarity": testRun(EnglishAnalyzer, "../datasets/full_docs", LMDirichletSimilarity())})
+print("Large dataset results", analyserResults)
+
+plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Large dataset results MAP@K")
+plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Large dataset results MAP@R")
+plot(analyserResults, ["totalTime"], ["Analysers", "Time"])
+
+end_time = datetime.datetime.now()
+print("Total run time: ", end_time - start_time)
 
 testRun(StandardAnalyzer, "../datasets/full_docs", LMDirichletSimilarity(), True)
