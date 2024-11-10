@@ -62,7 +62,7 @@ class DocumentIndexing:
             file_content = f.read()
             file_name = os.path.basename(path)
 
-        document.add(TextField("text_content", file_content, StringField.Store.YES))
+        document.add(TextField("text_content", file_content, StringField.Store.NO))
         document.add(StringField("file_name", file_name, StringField.Store.YES))
         document.add(StringField("file_path", path, StringField.Store.YES))
         term = Term("file_path", path)

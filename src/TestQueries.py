@@ -101,18 +101,18 @@ def evaluation(docRetrieval, small=True):
         #print("Result doc", 5, query_id, query_result_doc, results)
         r = len(list(set(results).intersection(set(query_result_doc))))
         sumedP5 += r / 5
-        sumedR5 += r/len(query_result_doc)
+        sumedR5 += r / len(query_result_doc)
 
         results = results[0:3]
         #print("Result doc", 3, query_id, query_result_doc, results)
         r = len(list(set(results).intersection(set(query_result_doc))))
         sumedP3 += r / 3
-        sumedR3 += r/len(query_result_doc)
+        sumedR3 += r / len(query_result_doc)
 
         result = results[0]
         #print("Result doc", 3, query_id, query_result_doc, results)
         r = result in query_result_doc
-        sumedP1 += r / 3
+        sumedP1 += r / 1
         sumedR1 += r/len(query_result_doc)
 
         total += 1
@@ -125,4 +125,15 @@ def evaluation(docRetrieval, small=True):
     print(f"MAP@3: {sumedP3/total} MAR@3: {sumedR3/total}")
     print(f"MAP@5: {sumedP5/total} MAR@5: {sumedR5/total}")
     print(f"MAP@10: {sumedP10 / total} MAR@10: {sumedR10 / total}")
+    return {
+        "QueryTime": end_time_query_test - start_time,
+        "MAP@1": sumedP1 / total,
+        "MAR@1": sumedR1 / total,
+        "MAP@3": sumedP3 / total,
+        "MAR@3": sumedR3 / total,
+        "MAP@5": sumedP5 / total,
+        "MAR@5": sumedR5 / total,
+        "MAP@10": sumedP10 / total,
+        "MAR@10": sumedR10 / total,
+    }
 

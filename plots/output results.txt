@@ -1,0 +1,154 @@
+"/home/steen/Documents/Local projects/wakeOnLan/.venv/Information_retrieval_py_lucene/bin/python" src/main.py 
+StandardAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.160203
+MAP@1: 0.6290322580645161 MAR@1: 0.6209677419354839
+MAP@3: 0.2728494623655919 MAR@3: 0.8044354838709677
+MAP@5: 0.17258064516129062 MAR@5: 0.8487903225806451
+MAP@10: 0.09153225806451636 MAR@10: 0.8991935483870968
+run time: 0:00:00.949198
+{'../datasets/full_docs_small': 1731245667.618143}
+SimpleAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.092961
+MAP@1: 0.6370967741935484 MAR@1: 0.6290322580645161
+MAP@3: 0.2701612903225812 MAR@3: 0.7963709677419355
+MAP@5: 0.17096774193548414 MAR@5: 0.8407258064516129
+MAP@10: 0.09193548387096796 MAR@10: 0.9032258064516129
+run time: 0:00:00.533021
+{'../datasets/full_docs_small': 1731245668.22953}
+WhitespaceAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.093613
+MAP@1: 0.4314516129032258 MAR@1: 0.4274193548387097
+MAP@3: 0.1895161290322583 MAR@3: 0.5604838709677419
+MAP@5: 0.12177419354838681 MAR@5: 0.6008064516129032
+MAP@10: 0.06733870967741924 MAR@10: 0.6633064516129032
+run time: 0:00:00.611338
+{'../datasets/full_docs_small': 1731245668.840628}
+EnglishAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.064238
+MAP@1: 0.6491935483870968 MAR@1: 0.6411290322580645
+MAP@3: 0.2903225806451615 MAR@3: 0.8548387096774194
+MAP@5: 0.1830645161290327 MAR@5: 0.8991935483870968
+MAP@10: 0.09596774193548414 MAR@10: 0.9435483870967742
+run time: 0:00:00.540193
+{'../datasets/full_docs_small': 1731245669.411944}
+Analyser test time:  0:00:02.638380
+StandardAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.072078
+MAP@1: 0.6290322580645161 MAR@1: 0.6209677419354839
+MAP@3: 0.2728494623655919 MAR@3: 0.8044354838709677
+MAP@5: 0.17258064516129062 MAR@5: 0.8487903225806451
+MAP@10: 0.09153225806451636 MAR@10: 0.8991935483870968
+run time: 0:00:00.458676
+{'../datasets/full_docs_small': 1731245669.863225}
+StandardAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.086112
+MAP@1: 0.782258064516129 MAR@1: 0.7741935483870968
+MAP@3: 0.30510752688172044 MAR@3: 0.8971774193548387
+MAP@5: 0.1895161290322586 MAR@5: 0.9274193548387096
+MAP@10: 0.09556451612903252 MAR@10: 0.9354838709677419
+run time: 0:00:00.477021
+{'../datasets/full_docs_small': 1731245670.326841}
+StandardAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.081699
+MAP@1: 0.8709677419354839 MAR@1: 0.8608870967741935
+MAP@3: 0.3104838709677419 MAR@3: 0.9133064516129032
+MAP@5: 0.1895161290322586 MAR@5: 0.9274193548387096
+MAP@10: 0.09556451612903252 MAR@10: 0.9354838709677419
+run time: 0:00:00.499807
+{'../datasets/full_docs_small': 1731245670.832013}
+StandardAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.075497
+MAP@1: 0.782258064516129 MAR@1: 0.7741935483870968
+MAP@3: 0.30107526881720437 MAR@3: 0.8870967741935484
+MAP@5: 0.1854838709677424 MAR@5: 0.9092741935483871
+MAP@10: 0.0951612903225809 MAR@10: 0.9314516129032258
+run time: 0:00:00.460167
+{'../datasets/full_docs_small': 1731245671.299746}
+StandardAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.076475
+MAP@1: 0.7862903225806451 MAR@1: 0.7782258064516129
+MAP@3: 0.30510752688172044 MAR@3: 0.8991935483870968
+MAP@5: 0.18709677419354886 MAR@5: 0.9173387096774194
+MAP@10: 0.0947580645161293 MAR@10: 0.9274193548387096
+run time: 0:00:00.451539
+{'../datasets/full_docs_small': 1731245671.750877}
+StandardAnalyzer
+indexing path:  ../datasets/full_docs_small
+Testing queries for  small  database:
+Query time:  0:00:00.074457
+MAP@1: 0.7419354838709677 MAR@1: 0.7338709677419355
+MAP@3: 0.2930107526881722 MAR@3: 0.8649193548387096
+MAP@5: 0.1830645161290327 MAR@5: 0.8991935483870968
+MAP@10: 0.09435483870967767 MAR@10: 0.9254032258064516
+run time: 0:00:00.464453
+{'../datasets/full_docs_small': 1731245672.217892}
+Retrivalmodel test time:  0:00:02.815885
+anyser results [{'StandardAnalyzer': (datetime.timedelta(microseconds=949198), {'QueryTime': datetime.timedelta(microseconds=160203), 'MAP@1': 0.6290322580645161, 'MAR@1': 0.6209677419354839, 'MAP@3': 0.2728494623655919, 'MAR@3': 0.8044354838709677, 'MAP@5': 0.17258064516129062, 'MAR@5': 0.8487903225806451, 'MAP@10': 0.09153225806451636, 'MAR@10': 0.8991935483870968})}, {'SimpleAnalyzer': (datetime.timedelta(microseconds=533021), {'QueryTime': datetime.timedelta(microseconds=92961), 'MAP@1': 0.6370967741935484, 'MAR@1': 0.6290322580645161, 'MAP@3': 0.2701612903225812, 'MAR@3': 0.7963709677419355, 'MAP@5': 0.17096774193548414, 'MAR@5': 0.8407258064516129, 'MAP@10': 0.09193548387096796, 'MAR@10': 0.9032258064516129})}, {'WhitespaceAnalyzer': (datetime.timedelta(microseconds=611338), {'QueryTime': datetime.timedelta(microseconds=93613), 'MAP@1': 0.4314516129032258, 'MAR@1': 0.4274193548387097, 'MAP@3': 0.1895161290322583, 'MAR@3': 0.5604838709677419, 'MAP@5': 0.12177419354838681, 'MAR@5': 0.6008064516129032, 'MAP@10': 0.06733870967741924, 'MAR@10': 0.6633064516129032})}, {'EnglishAnalyzer': (datetime.timedelta(microseconds=540193), {'QueryTime': datetime.timedelta(microseconds=64238), 'MAP@1': 0.6491935483870968, 'MAR@1': 0.6411290322580645, 'MAP@3': 0.2903225806451615, 'MAR@3': 0.8548387096774194, 'MAP@5': 0.1830645161290327, 'MAR@5': 0.8991935483870968, 'MAP@10': 0.09596774193548414, 'MAR@10': 0.9435483870967742})}]
+model retrive resulte [{'ClassicSimilarity': (datetime.timedelta(microseconds=458676), {'QueryTime': datetime.timedelta(microseconds=72078), 'MAP@1': 0.6290322580645161, 'MAR@1': 0.6209677419354839, 'MAP@3': 0.2728494623655919, 'MAR@3': 0.8044354838709677, 'MAP@5': 0.17258064516129062, 'MAR@5': 0.8487903225806451, 'MAP@10': 0.09153225806451636, 'MAR@10': 0.8991935483870968})}, {'BM25Similarity': (datetime.timedelta(microseconds=477021), {'QueryTime': datetime.timedelta(microseconds=86112), 'MAP@1': 0.782258064516129, 'MAR@1': 0.7741935483870968, 'MAP@3': 0.30510752688172044, 'MAR@3': 0.8971774193548387, 'MAP@5': 0.1895161290322586, 'MAR@5': 0.9274193548387096, 'MAP@10': 0.09556451612903252, 'MAR@10': 0.9354838709677419})}, {'LMDirichletSimilarity': (datetime.timedelta(microseconds=499807), {'QueryTime': datetime.timedelta(microseconds=81699), 'MAP@1': 0.8709677419354839, 'MAR@1': 0.8608870967741935, 'MAP@3': 0.3104838709677419, 'MAR@3': 0.9133064516129032, 'MAP@5': 0.1895161290322586, 'MAR@5': 0.9274193548387096, 'MAP@10': 0.09556451612903252, 'MAR@10': 0.9354838709677419})}, {'LMJelinekMercerSimilarity(0.7)': (datetime.timedelta(microseconds=460167), {'QueryTime': datetime.timedelta(microseconds=75497), 'MAP@1': 0.782258064516129, 'MAR@1': 0.7741935483870968, 'MAP@3': 0.30107526881720437, 'MAR@3': 0.8870967741935484, 'MAP@5': 0.1854838709677424, 'MAR@5': 0.9092741935483871, 'MAP@10': 0.0951612903225809, 'MAR@10': 0.9314516129032258})}, {'LMJelinekMercerSimilarity(0.5)': (datetime.timedelta(microseconds=451539), {'QueryTime': datetime.timedelta(microseconds=76475), 'MAP@1': 0.7862903225806451, 'MAR@1': 0.7782258064516129, 'MAP@3': 0.30510752688172044, 'MAR@3': 0.8991935483870968, 'MAP@5': 0.18709677419354886, 'MAR@5': 0.9173387096774194, 'MAP@10': 0.0947580645161293, 'MAR@10': 0.9274193548387096})}, {'LMJelinekMercerSimilarity(0.9)': (datetime.timedelta(microseconds=464453), {'QueryTime': datetime.timedelta(microseconds=74457), 'MAP@1': 0.7419354838709677, 'MAR@1': 0.7338709677419355, 'MAP@3': 0.2930107526881722, 'MAR@3': 0.8649193548387096, 'MAP@5': 0.1830645161290327, 'MAR@5': 0.8991935483870968, 'MAP@10': 0.09435483870967767, 'MAR@10': 0.9254032258064516})}]
+Total run time:  0:00:05.454328
+---------- Large dataset ----------
+StandardAnalyzer
+indexing path:  ../datasets/full_docs
+Testing queries for  big  database:
+Query time:  0:00:26.894520
+MAP@1: 0.444743935309973 MAR@1: 0.029483494107597385
+MAP@3: 0.3854447439353073 MAR@3: 0.07633599190421908
+MAP@5: 0.3515979976896497 MAR@5: 0.11555606707382259
+MAP@10: 0.29426261070465837 MAR@10: 0.19246280443514582
+run time: 0:03:11.595006
+{'../datasets/full_docs': 1731245837.843782}
+EnglishAnalyzer
+indexing path:  ../datasets/full_docs
+Testing queries for  big  database:
+Query time:  0:00:14.735723
+MAP@1: 0.4955718136311128 MAR@1: 0.03300461563268613
+MAP@3: 0.4341547939930673 MAR@3: 0.08644490244262766
+MAP@5: 0.39345398536773735 MAR@5: 0.12971649124733473
+MAP@10: 0.3241624951867532 MAR@10: 0.21227940225933076
+run time: 0:02:32.955631
+{'../datasets/full_docs': 1731246003.121674}
+Analyser test time:  0:05:44.849414
+StandardAnalyzer
+indexing path:  ../datasets/full_docs
+Testing queries for  big  database:
+Query time:  0:00:28.223130
+MAP@1: 0.44493646515209856 MAR@1: 0.02949632943040576
+MAP@3: 0.3856372737774328 MAR@3: 0.0763747270748372
+MAP@5: 0.35152098575279944 MAR@5: 0.11552396273867627
+MAP@10: 0.29433962264150854 MAR@10: 0.1925302626391432
+run time: 0:02:27.243015
+{'../datasets/full_docs': 1731246137.01592}
+StandardAnalyzer
+indexing path:  ../datasets/full_docs
+Testing queries for  big  database:
+Query time:  0:00:35.636016
+MAP@1: 0.9522525991528686 MAR@1: 0.06489911744802343
+MAP@3: 0.9111153895520447 MAR@3: 0.18540194288025022
+MAP@5: 0.8709279938390595 MAR@5: 0.2938648174461571
+MAP@10: 0.7597420100115636 MAR@10: 0.5053951328392232
+run time: 0:02:39.161917
+{'../datasets/full_docs': 1731246296.685227}
+Retrivalmodel test time:  0:05:26.030066
+anyser results [{'StandardAnalyzer': (datetime.timedelta(seconds=191, microseconds=595006), {'QueryTime': datetime.timedelta(seconds=26, microseconds=894520), 'MAP@1': 0.444743935309973, 'MAR@1': 0.029483494107597385, 'MAP@3': 0.3854447439353073, 'MAR@3': 0.07633599190421908, 'MAP@5': 0.3515979976896497, 'MAR@5': 0.11555606707382259, 'MAP@10': 0.29426261070465837, 'MAR@10': 0.19246280443514582})}, {'EnglishAnalyzer': (datetime.timedelta(seconds=152, microseconds=955631), {'QueryTime': datetime.timedelta(seconds=14, microseconds=735723), 'MAP@1': 0.4955718136311128, 'MAR@1': 0.03300461563268613, 'MAP@3': 0.4341547939930673, 'MAR@3': 0.08644490244262766, 'MAP@5': 0.39345398536773735, 'MAR@5': 0.12971649124733473, 'MAP@10': 0.3241624951867532, 'MAR@10': 0.21227940225933076})}]
+model retrive resulte [{'ClassicSimilarity': (datetime.timedelta(seconds=147, microseconds=243015), {'QueryTime': datetime.timedelta(seconds=28, microseconds=223130), 'MAP@1': 0.44493646515209856, 'MAR@1': 0.02949632943040576, 'MAP@3': 0.3856372737774328, 'MAR@3': 0.0763747270748372, 'MAP@5': 0.35152098575279944, 'MAR@5': 0.11552396273867627, 'MAP@10': 0.29433962264150854, 'MAR@10': 0.1925302626391432})}, {'LMDirichletSimilarity': (datetime.timedelta(seconds=159, microseconds=161917), {'QueryTime': datetime.timedelta(seconds=35, microseconds=636016), 'MAP@1': 0.9522525991528686, 'MAR@1': 0.06489911744802343, 'MAP@3': 0.9111153895520447, 'MAR@3': 0.18540194288025022, 'MAP@5': 0.8709279938390595, 'MAR@5': 0.2938648174461571, 'MAP@10': 0.7597420100115636, 'MAR@10': 0.5053951328392232})}]
+
+Process finished with exit code 0
+
