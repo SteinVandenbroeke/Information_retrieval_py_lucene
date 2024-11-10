@@ -35,14 +35,14 @@ class DocumentIndexing:
         indexWriterConfig.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND) #OpenMode: APPEND, CREATE, CREATE_OR_APPEND
         self.indexWriter = IndexWriter(directory, indexWriterConfig)
 
-    def add_folder(self, path, reinit = False):
-        if path not in self.folders or reinit:
+    def add_folder(self, path, reindex = False):
+        if path not in self.folders or reindex:
             self.folders[path] = None
 
-    def index_folders(self, reInit = False, expireTime = None):
+    def index_folders(self, reindex = False, expireTime = None):
         for path, lastUpdate in self.folders.items():
             lastUpdate_dt = datetime.fromtimestamp(lastUpdate) if lastUpdate is not None else None
-            if lastUpdate is None or reInit or (expireTime is not None and lastUpdate_dt + expireTime < datetime.now()):
+            if lastUpdate is None or reindex or (expireTime is not None and lastUpdate_dt + expireTime < datetime.now()):
                 print("indexing path: ", path)
                 for d in os.listdir(path):
                     if d.endswith('.txt'):

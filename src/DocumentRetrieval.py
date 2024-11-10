@@ -19,10 +19,10 @@ class DocumentRetrieval:
         self.searcher = IndexSearcher(reader)
         self.query_parser = QueryParser("text_content", analyzer)
 
-    def search(self, querystring):
+    def search(self, querystring, result_amount):
         escaped_querystring = QueryParserBase.escape(querystring)
         query = self.query_parser.parse(escaped_querystring)
-        hits = self.searcher.search(query, 10).scoreDocs
+        hits = self.searcher.search(query, result_amount).scoreDocs
         return hits
 
     def get_doc(self, doc_id):
