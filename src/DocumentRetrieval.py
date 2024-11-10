@@ -10,13 +10,16 @@ from org.apache.lucene.search import IndexSearcher
 from org.apache.lucene.index import DirectoryReader
 from org.apache.lucene.queryparser.classic import QueryParser
 from org.apache.lucene.queryparser.classic import QueryParserBase
-
+from org.apache.lucene.search.similarities import ClassicSimilarity
+from org.apache.lucene.store import MMapDirectory
 
 class DocumentRetrieval:
-    def __init__(self, index_location, analyzer = StandardAnalyzer()):
+    def __init__(self, index_location, analyzer = StandardAnalyzer(), retrival_model = ClassicSimilarity()):
         directory = FSDirectory.open(Paths.get(index_location))
+        #directory = MMapDirectory(Paths.get(index_location))TODO
         reader = DirectoryReader.open(directory)
         self.searcher = IndexSearcher(reader)
+        self.searcher.setSimilarity(retrival_model)
         self.query_parser = QueryParser("text_content", analyzer)
 
     def search(self, querystring):
