@@ -39,6 +39,7 @@ class DocumentIndexing:
             self.folders[path] = None
 
     def index_folders(self, reindex = False, expireTime = None):
+        start_time = datetime.now()
         for path, lastUpdate in self.folders.items():
             lastUpdate_dt = datetime.fromtimestamp(lastUpdate) if lastUpdate is not None else None
             if lastUpdate is None or reindex or (expireTime is not None and lastUpdate_dt + expireTime < datetime.now()):
@@ -50,6 +51,8 @@ class DocumentIndexing:
                 self.indexWriter.commit()
                 unix_timestamp = (datetime.utcnow() - datetime(1970, 1, 1)).total_seconds()
                 self.folders[path] = unix_timestamp
+        end_time_query_test = datetime.now()
+        print("Indexing time: ", end_time_query_test - start_time)
 
 
     def close(self):

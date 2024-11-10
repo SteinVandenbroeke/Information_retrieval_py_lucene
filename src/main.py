@@ -12,7 +12,6 @@ from org.apache.lucene.analysis.core import SimpleAnalyzer
 from org.apache.lucene.analysis.core import WhitespaceAnalyzer
 from org.apache.lucene.search.similarities import BM25Similarity
 from org.apache.lucene.search.similarities import ClassicSimilarity
-from src.CustomImplementations.CustomAnalyzer import CustomStemmingAnalyzer
 from org.apache.lucene.search.similarities import LMJelinekMercerSimilarity
 from org.apache.lucene.search.similarities import LMDirichletSimilarity
 import matplotlib.pyplot as plt
@@ -51,7 +50,8 @@ def testRun(analyzer, dataset, retrival_model, query_parser, scoring_model):
     small = False
     if "small" in dataset:
         small = True
-    print(str(analyzer.__name__))
+
+    print(str(analyzer.__name__) + " and " + str(retrival_model) + ":")
     start_time = datetime.datetime.now()
     doc_index_StandardAnalyzer = DocumentIndexing(str(dataset.split("/").pop() + str(analyzer.__name__)), analyzer())
     doc_index_StandardAnalyzer.add_folder(dataset, True)
@@ -62,6 +62,7 @@ def testRun(analyzer, dataset, retrival_model, query_parser, scoring_model):
     elapsed_time = end_time - start_time
     print("run time:", elapsed_time)
     doc_index_StandardAnalyzer.close()
+    print("-----------------------------------------------")
     return (elapsed_time, passes_failes)
 
 
@@ -69,16 +70,16 @@ def analyserTest(data_set, to_test = ["StandardAnalyzer", "SimpleAnalyzer", "Whi
     analyserTest_start_time = datetime.datetime.now()
     results = []
     if "StandardAnalyzer" in to_test:
-        results.append({"StandardAnalyzer": testRun(StandardAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"StandardAnalyzer and ClassicSimilarity": testRun(StandardAnalyzer, data_set, ClassicSimilarity(), None, None)})
 
     if "SimpleAnalyzer" in to_test:
-        results.append({"SimpleAnalyzer": testRun(SimpleAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"SimpleAnalyzer and ClassicSimilarity": testRun(SimpleAnalyzer, data_set, ClassicSimilarity(), None, None)})
 
     if "WhitespaceAnalyzer" in to_test:
-        results.append({"WhitespaceAnalyzer": testRun(WhitespaceAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"WhitespaceAnalyzer and ClassicSimilarity": testRun(WhitespaceAnalyzer, data_set, ClassicSimilarity(), None, None)})
 
     if "EnglishAnalyzer" in to_test:
-        results.append({"EnglishAnalyzer": testRun(EnglishAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"EnglishAnalyzer and ClassicSimilarity": testRun(EnglishAnalyzer, data_set, ClassicSimilarity(), None, None)})
     #results.append(testRun(CustomStemmingAnalyzer, data_set, ClassicSimilarity(), None, None))TODO
     analyserTest_end_time = datetime.datetime.now()
     print("Analyser test time: ", analyserTest_end_time - analyserTest_start_time)
@@ -88,22 +89,22 @@ def retrivalModelTest(data_set, to_test = ["ClassicSimilarity", "BM25Similarity"
     retrivalModel_start_time = datetime.datetime.now()
     results = []
     if "ClassicSimilarity" in to_test:
-        results.append({"ClassicSimilarity": testRun(StandardAnalyzer, data_set, ClassicSimilarity(), None, None)})
+        results.append({"StandardAnalyzer and ClassicSimilarity": testRun(StandardAnalyzer, data_set, ClassicSimilarity(), None, None)})
 
     if "BM25Similarity" in to_test:
-        results.append({"BM25Similarity": testRun(StandardAnalyzer, data_set, BM25Similarity(), None, None)})
+        results.append({"StandardAnalyzer and BM25Similarity": testRun(StandardAnalyzer, data_set, BM25Similarity(), None, None)})
 
     if "LMDirichletSimilarity" in to_test:
-        results.append({"LMDirichletSimilarity": testRun(StandardAnalyzer, data_set, LMDirichletSimilarity(), None, None)})
+        results.append({"StandardAnalyzer and LMDirichletSimilarity": testRun(StandardAnalyzer, data_set, LMDirichletSimilarity(), None, None)})
 
     if "LMJelinekMercerSimilarity(0.7)" in to_test:
-        results.append({"LMJelinekMercerSimilarity(0.7)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.7), None, None)})
+        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.7)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.7), None, None)})
 
     if "LMJelinekMercerSimilarity(0.5)" in to_test:
-        results.append({"LMJelinekMercerSimilarity(0.5)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.5), None, None)})
+        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.5)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.5), None, None)})
 
     if "LMJelinekMercerSimilarity(0.9)" in to_test:
-        results.append({"LMJelinekMercerSimilarity(0.9)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.9), None, None)})
+        results.append({"StandardAnalyzer and LMJelinekMercerSimilarity(0.9)": testRun(StandardAnalyzer, data_set, LMJelinekMercerSimilarity(0.9), None, None)})
     retrivalModel_end_time = datetime.datetime.now()
     print("Retrivalmodel test time: ", retrivalModel_end_time - retrivalModel_start_time)
     return results
@@ -112,33 +113,31 @@ def retrivalModelTest(data_set, to_test = ["ClassicSimilarity", "BM25Similarity"
 # docIndexing.add_folder("../datasets/
 
 start_time = datetime.datetime.now()
-analyserResults = analyserTest("../datasets/full_docs_small")
-retrivalResults = retrivalModelTest("../datasets/full_docs_small")
-print("anyser results", analyserResults)
-print("model retrive resulte", retrivalResults)
-end_time = datetime.datetime.now()
-print("Total run time: ", end_time - start_time)
-
-plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Analysers precision small dataset")
-plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Analysers retrival small dataset")
-plot(analyserResults, ["QueryTime"], ["Analysers", "Time"])
-
-plot(retrivalResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Retrival models", "MAP@K"], "Retrival models precision small dataset")
-plot(retrivalResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Retrival models", "MAR@K"], "Retrival models precision small dataset")
-plot(retrivalResults, ["QueryTime"], ["Retrival models", "Time"], "Retrival models run time small dataset")
-
+# analyserResults = analyserTest("../datasets/full_docs_small")
+# retrivalResults = retrivalModelTest("../datasets/full_docs_small")
+# print("anyser results", analyserResults)
+# print("model retrive resulte", retrivalResults)
+#
+#
+# plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Analysers precision small dataset")
+# plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Analysers retrival small dataset")
+# plot(analyserResults, ["QueryTime"], ["Analysers", "Time"])
+#
+# plot(retrivalResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Retrival models", "MAP@K"], "Retrival models precision small dataset")
+# plot(retrivalResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Retrival models", "MAR@K"], "Retrival models precision small dataset")
+# plot(retrivalResults, ["QueryTime"], ["Retrival models", "Time"], "Retrival models run time small dataset")
+#
 
 
 print("---------- Large dataset ----------")
 analyserResults = analyserTest("../datasets/full_docs", ["StandardAnalyzer", "EnglishAnalyzer"])
-retrivalResults = retrivalModelTest("../datasets/full_docs", ["ClassicSimilarity", "LMDirichletSimilarity"])
-print("anyser results", analyserResults)
-print("model retrive resulte", retrivalResults)
+analyserResults.append({"StandardAnalyzer and LMDirichletSimilarity": testRun(StandardAnalyzer, "../datasets/full_docs", LMDirichletSimilarity(), None, None)})
+analyserResults.append({"EnglihAnalyzer and LMDirichletSimilarity": testRun(EnglishAnalyzer, "../datasets/full_docs", LMDirichletSimilarity(), None, None)})
+print("Large dataset results", analyserResults)
 
-plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Analysers precision large dataset")
-plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Analysers retrival large dataset")
+plot(analyserResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Analysers", "MAP@K"], "Large dataset results MAP@K")
+plot(analyserResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Analysers", "MAR@K"], "Large dataset results MAP@R")
 plot(analyserResults, ["QueryTime"], ["Analysers", "Time"])
 
-plot(retrivalResults, ["MAP@1", "MAP@3", "MAP@5", "MAP@10"], ["Retrival models", "MAP@K"], "Retrival models precision large dataset")
-plot(retrivalResults, ["MAR@1", "MAR@3", "MAR@5", "MAR@10"], ["Retrival models", "MAR@K"], "Retrival models precision large dataset")
-plot(retrivalResults, ["QueryTime"], ["Retrival models", "Time"], "Retrival models run time large dataset")
+end_time = datetime.datetime.now()
+print("Total run time: ", end_time - start_time)
